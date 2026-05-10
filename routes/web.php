@@ -57,6 +57,11 @@ Route::get('/test-view', function () {
     return view('test-home');
 });
 
+// Fresh test route to bypass any caching
+Route::get('/fresh', function () {
+    return 'Fresh route at ' . now()->toDateTimeString();
+});
+
 // Citizen routes – only users with role 'citizen'
 Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':citizen'])->group(function () {
     Route::get('/dashboard', [ReportController::class, 'index'])->name('dashboard');
