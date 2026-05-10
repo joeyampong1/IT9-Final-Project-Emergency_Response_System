@@ -59,10 +59,9 @@ RUN npm install && npm run build
 # Create storage symlink (no database connection required)
 RUN php artisan storage:link || true
 
-# Optimize Laravel for production (caches config/routes/views – no database needed)
+# Optimize Laravel for production (caches config/routes/views )
 RUN php artisan config:cache \
-    && php artisan route:cache \
-    && php artisan view:cache
+    && php artisan route:cache
 
 # Fix permissions
 RUN mkdir -p storage/framework/cache storage/framework/sessions \
