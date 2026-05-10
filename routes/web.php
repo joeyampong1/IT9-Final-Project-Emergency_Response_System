@@ -53,7 +53,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/test-view', function () {
-    return view('welcome');  // this loads your existing landing page
+    return view('test-home');
 });
 
 // Citizen routes – only users with role 'citizen'
