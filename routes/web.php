@@ -15,7 +15,9 @@ use App\Http\Controllers\Admin\SettingController;
 
 Auth::routes();
 
-
+Route::get('/raw-test', function () {
+    return 'Laravel is alive';
+});
 Route::get('/healthz', function () {
     return response()->json(['status' => 'ok']);
 });
