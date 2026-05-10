@@ -47,11 +47,12 @@ Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':admin'])->p
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');   
 });
 
-// Public home page (temporary test)
+// Public home page 
 Route::get('/', function () {
-    return 'Homepage is working!';
+    return view('welcome');
 })->name('home');
 
+// Optional test route (you can delete this line later if not needed)
 Route::get('/test-view', function () {
     return view('test-home');
 });
