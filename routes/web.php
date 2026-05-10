@@ -47,10 +47,14 @@ Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':admin'])->p
     Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');   
 });
 
-// Public home page
+// Public home page (temporary test)
 Route::get('/', function () {
-    return view('welcome');
+    return 'Homepage is working!';
 })->name('home');
+
+Route::get('/test-view', function () {
+    return view('welcome');  // this loads your existing landing page
+});
 
 // Citizen routes – only users with role 'citizen'
 Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':citizen'])->group(function () {
