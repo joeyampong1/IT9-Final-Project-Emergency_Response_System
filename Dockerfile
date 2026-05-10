@@ -74,4 +74,4 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions \
 EXPOSE 10000
 
 # Start Apache
-CMD php artisan migrate --force && apache2-foreground
+CMD php artisan route:clear && php artisan config:clear && php artisan migrate --force && apache2-foreground
