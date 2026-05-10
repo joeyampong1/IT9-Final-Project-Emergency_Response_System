@@ -15,6 +15,11 @@ use App\Http\Controllers\Admin\SettingController;
 
 Auth::routes();
 
+
+Route::get('/healthz', function () {
+    return response()->json(['status' => 'ok']);
+});
+
 // Profile routes – accessible to all authenticated users
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
