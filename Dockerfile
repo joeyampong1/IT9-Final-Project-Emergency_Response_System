@@ -59,6 +59,9 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions \
 # Disable OPcache so changes are visible immediately
 RUN echo "opcache.enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
+# Ensure index.php is the default file
+RUN echo "DirectoryIndex index.php" >> /etc/apache2/apache2.conf
+
 EXPOSE 10000
 
 # On startup: clear all caches, run migrations, then start Apache
