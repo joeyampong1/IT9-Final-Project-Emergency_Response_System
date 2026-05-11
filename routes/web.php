@@ -51,8 +51,8 @@ Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':admin'])->p
 
 // Public home page 
 Route::get('/', function () {
-    phpinfo();
-});
+    return view('test-home');
+})->name('home');
 
 // Optional test route (you can delete this line later if not needed)
 Route::get('/test-view', function () {

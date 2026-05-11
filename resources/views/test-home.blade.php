@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head><title>ERS Test</title></head>
-<body>
-    <h1>Emergency Response System</h1>
-    <p>If you see this, views are working.</p>
-</body>
+<head><title>Test</title></head>
+<body><h1>Laravel is rendering Blade templates.</h1></body>
 </html>
