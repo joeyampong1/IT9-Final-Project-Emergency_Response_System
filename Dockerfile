@@ -69,6 +69,9 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions \
     && chown -R www-data:www-data storage bootstrap/cache public/uploads \
     && chmod -R 775 storage bootstrap/cache public/uploads
 
+RUN chown -R www-data:www-data storage/framework/views
+RUN chmod -R 775 storage/framework/views
+
 # DO NOT RUN MIGRATIONS OR SEEDERS HERE! They will be executed at runtime via release command or after deploy.
 
 EXPOSE 10000
