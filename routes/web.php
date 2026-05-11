@@ -54,30 +54,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// Optional test route (you can delete this line later if not needed)
-Route::get('/test-view', function () {
-    return view('test-home');
-});
-
-// Fresh test route to bypass any caching
-Route::get('/fresh', function () {
-    return 'Fresh route at ' . now()->toDateTimeString();
-});
-
-
-Route::get('/debug-test', function () {
-    return '<h1>Debug Test</h1><p>If you see this, Laravel is working.</p>';
-});
-
-
-Route::get('/ping', function () {
-    return 'pong';
-});
-
-Route::get('/original-page', function () {
-    return view('welcome');
-});
-
     // Citizen routes – only users with role 'citizen'
     Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':citizen'])->group(function () {
         Route::get('/dashboard', [ReportController::class, 'index'])->name('dashboard');
