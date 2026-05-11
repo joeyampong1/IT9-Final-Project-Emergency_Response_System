@@ -50,7 +50,7 @@ Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':admin'])->p
 
 // Public home page 
 Route::get('/', function () {
-    return view('welcome');
+    return 'Homepage is working!';
 })->name('home');
 
 // Optional test route (you can delete this line later if not needed)
