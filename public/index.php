@@ -1,5 +1,8 @@
 <?php
 
+
+echo "INDEX.PHP IS REACHED. Time: " . date('Y-m-d H:i:s');
+
 // Force all errors to be displayed
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
