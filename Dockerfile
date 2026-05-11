@@ -35,25 +35,30 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+RUN composer run-script post-autoload-dump || true
 
 RUN npm install && npm run build
 
-RUN php artisan config:clear \
-    && php artisan route:clear \
-    && php artisan view:clear
-
+# Wala na ang mga php artisan config:clear, route:clear, view:clear – kay nagfail sa build
+# Gipulihan sa storage:link ug migrate nga adunay || true aron dili mo-fail
 RUN php artisan storage:link || true
+RUN php artisan migrate --force || true
 
+# Fix permissions
 RUN mkdir -p storage/framework/cache storage/framework/sessions \
     storage/framework/views bootstrap/cache public/uploads \
     && chown -R www-data:www-data storage bootstrap/cache public/uploads \
     && chmod -R 775 storage bootstrap/cache public/uploads
 
-RUN php artisan migrate --force || true
+# Disable OPcache (para makita dayon ang mga kausaban)
+RUN echo "opcache.enable=0" >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 EXPOSE 10000
 
-CMD ["apache2-foreground"]
+# Sa startup: clear tanang cache, dayon migrate, dayon start Apache
+CMD php artisan optimize:clear && php artisan migrate --force && apache2-foreground
