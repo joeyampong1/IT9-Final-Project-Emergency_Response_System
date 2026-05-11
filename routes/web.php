@@ -69,8 +69,13 @@ Route::get('/debug-test', function () {
     return '<h1>Debug Test</h1><p>If you see this, Laravel is working.</p>';
 });
 
+
 Route::get('/ping', function () {
     return 'pong';
+});
+
+Route::get('/original-page', function () {
+    return view('welcome');
 });
 
     // Citizen routes – only users with role 'citizen'
