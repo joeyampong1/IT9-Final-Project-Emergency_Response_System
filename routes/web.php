@@ -11,6 +11,7 @@ use App\Http\Controllers\HotlineController;
 use App\Http\Controllers\Admin\AnalyticsController;
 use App\Http\Controllers\Admin\ActivityLogController;
 use App\Http\Controllers\Admin\SettingController;
+use Illuminate\Support\Facades\Auth;
 
 
 Auth::routes();
@@ -65,6 +66,10 @@ Route::get('/fresh', function () {
 
 Route::get('/debug-test', function () {
     return '<h1>Debug Test</h1><p>If you see this, Laravel is working.</p>';
+});
+
+Route::get('/ping', function () {
+    return 'pong';
 });
 
     // Citizen routes – only users with role 'citizen'
