@@ -62,16 +62,21 @@ Route::get('/fresh', function () {
     return 'Fresh route at ' . now()->toDateTimeString();
 });
 
-// Citizen routes – only users with role 'citizen'
-Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':citizen'])->group(function () {
-    Route::get('/dashboard', [ReportController::class, 'index'])->name('dashboard');
-    Route::resource('reports', ReportController::class)->except(['edit', 'update', 'destroy']);
-    Route::get('/report-tracker', [ReportController::class, 'tracker'])->name('citizen.tracker');   
+
+Route::get('/debug-test', function () {
+    return '<h1>Debug Test</h1><p>If you see this, Laravel is working.</p>';
 });
 
-// Citizen additional pages
-Route::middleware(['auth'])->group(function () {
-    Route::get('/notifications', [NotificationController::class, 'index'])->name('citizen.notifications');
-    Route::get('/emergency-hotlines', [HotlineController::class, 'index'])->name('citizen.hotlines');
-    
-});
+    // Citizen routes – only users with role 'citizen'
+    Route::middleware(['auth', \App\Http\Middleware\CheckRole::class . ':citizen'])->group(function () {
+        Route::get('/dashboard', [ReportController::class, 'index'])->name('dashboard');
+        Route::resource('reports', ReportController::class)->except(['edit', 'update', 'destroy']);
+        Route::get('/report-tracker', [ReportController::class, 'tracker'])->name('citizen.tracker');   
+    });
+
+    // Citizen additional pages
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/notifications', [NotificationController::class, 'index'])->name('citizen.notifications');
+        Route::get('/emergency-hotlines', [HotlineController::class, 'index'])->name('citizen.hotlines');
+        
+    });
